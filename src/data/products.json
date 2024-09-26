@@ -1,0 +1,61 @@
+[
+  {
+    "name": "ironPlate",
+    "displayName": "Iron Plate",
+    "type": "product",
+    "ingredients": [
+      { "name": "ironOre", "displayName": "Iron Ore", "amount": 2 }
+    ],
+    "machineRequired": "furnace",
+    "processingTime": 2,
+    "outputQuantity": 1
+  },
+  {
+    "name": "copperWire",
+    "displayName": "Copper Wire",
+    "type": "product",
+    "ingredients": [
+      { "name": "copperOre", "displayName": "Copper Ore", "amount": 1 }
+    ],
+    "machineRequired": "furnace",
+    "processingTime": 3,
+    "outputQuantity": 1
+  },
+  {
+    "name": "circuit",
+    "displayName": "Circuit",
+    "type": "product",
+    "ingredients": [
+      { "name": "copperWire", "displayName": "Copper Wire", "amount": 2 },
+      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 1 }
+    ],
+    "machineRequired": "assembler",
+    "processingTime": 5,
+    "outputQuantity": 1
+  },
+  {
+    "name": "advancedCircuit",
+    "displayName": "Advanced Circuit",
+    "type": "product",
+    "ingredients": [
+      { "name": "circuit", "displayName": "Circuit", "amount": 2 },
+      { "name": "copperWire", "displayName": "Copper Wire", "amount": 4 },
+      { "name": "steelPlate", "displayName": "Steel Plate", "amount": 1 }
+    ],
+    "machineRequired": "assembler",
+    "processingTime": 6,
+    "outputQuantity": 1
+  },
+  {
+    "name": "steelPlate",
+    "displayName": "Steel Plate",
+    "type": "product",
+    "ingredients": [
+      { "name": "ironOre", "displayName": "Iron Ore", "amount": 3 },
+      { "name": "coal", "displayName": "Coal", "amount": 2 }
+    ],
+    "machineRequired": "furnace",
+    "processingTime": 4,
+    "outputQuantity": 1
+  }
+]

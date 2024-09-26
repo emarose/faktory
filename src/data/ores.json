@@ -1,11 +1,5 @@
 [
   {
-    "name": "stone",
-    "displayName": "Stone",
-    "type": "resource",
-    "baseRate": 1
-  },
-  {
     "name": "ironOre",
     "displayName": "Iron Ore",
     "type": "resource",
@@ -22,80 +16,5 @@
     "displayName": "Coal",
     "type": "resource",
     "baseRate": 1
-  },
-  {
-    "name": "ironIngot",
-    "displayName": "Iron Ingot",
-    "type": "product",
-    "ingredients": [
-      { "name": "ironOre", "displayName": "Iron Ore", "amount": 2 }
-    ],
-    "machineRequired": "furnace",
-    "processingTime": 2,
-    "outputQuantity": 1
-  },
-
-  {
-    "name": "copperIngot",
-    "displayName": "Copper Ingot",
-    "type": "product",
-    "ingredients": [
-      { "name": "copperOre", "displayName": "Copper Ore", "amount": 2 }
-    ],
-    "machineRequired": "furnace",
-    "processingTime": 2,
-    "outputQuantity": 1
-  },
-  {
-    "name": "ironPlate",
-    "displayName": "Iron Plate",
-    "type": "product",
-    "ingredients": [
-      { "name": "ironOre", "displayName": "Iron Ore", "amount": 2 }
-    ],
-    "machineRequired": "furnace",
-    "processingTime": 2,
-    "outputQuantity": 1
-  },
-  {
-    "name": "copperWire",
-    "displayName": "Copper Wire",
-    "type": "product",
-    "ingredients": [
-      { "name": "copperOre", "displayName": "Copper Ore", "amount": 1 }
-    ],
-    "machineRequired": "furnace",
-    "processingTime": 3,
-    "outputQuantity": 2
-  },
-  {
-    "name": "circuit",
-    "displayName": "Circuit",
-    "type": "product",
-    "ingredients": [
-      { "name": "copperWire", "displayName": "Copper Wire", "amount": 2 },
-      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 1 }
-    ],
-    "machineRequired": "assembler",
-    "processingTime": 5,
-    "outputQuantity": 1
-  },
-  {
-    "name": "furnace",
-    "displayName": "Furnace",
-    "type": "machine",
-    "buildCost": [
-      { "name": "stone", "displayName": "Stone", "amount": 5 },
-      { "name": "coal", "displayName": "Coal", "amount": 5 }
-    ]
-  },
-  {
-    "name": "assembler",
-    "displayName": "Assembler",
-    "type": "machine",
-    "buildCost": [
-      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 10 },
-      { "name": "circuit", "displayName": "Circuit", "amount": 2 }
-    ]
   }
 ]

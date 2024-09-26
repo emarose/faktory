@@ -1,0 +1,42 @@
+[
+  {
+    "name": "furnace",
+    "displayName": "Furnace",
+    "type": "machine",
+    "buildCost": [
+      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 5 },
+      { "name": "coal", "displayName": "Coal", "amount": 2 }
+    ]
+  },
+  {
+    "name": "assembler",
+    "displayName": "Assembler",
+    "type": "machine",
+    "buildCost": [
+      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 10 },
+      { "name": "circuit", "displayName": "Circuit", "amount": 2 }
+    ]
+  },
+  {
+    "name": "electricFurnace",
+    "displayName": "Electric Furnace",
+    "type": "machine",
+    "buildCost": [
+      {
+        "name": "advancedCircuit",
+        "displayName": "Advanced Circuit",
+        "amount": 2
+      },
+      { "name": "steelPlate", "displayName": "Steel Plate", "amount": 4 }
+    ]
+  },
+  {
+    "name": "roboticAssembler",
+    "displayName": "Robotic Assembler",
+    "type": "machine",
+    "buildCost": [
+      { "name": "engineUnit", "displayName": "Engine Unit", "amount": 2 },
+      { "name": "circuit", "displayName": "Circuit", "amount": 5 }
+    ]
+  }
+]

@@ -6,17 +6,22 @@ import { Button, Card } from "react-bootstrap";
 function ResourceExtractor() {
   const { state, dispatch } = useContext(GameContext);
 
-  const extractResource = (resourceName) => {
+  const extractResource = (resourceName, baseRate) => {
     dispatch({
       type: "EXTRACT_RESOURCE",
       resource: resourceName,
-      amount: 1,
+      amount: baseRate,
     });
   };
 
   const getDisplayName = (resourceName) => {
     const resource = oresData.find((ore) => ore.name === resourceName);
     return resource ? resource.displayName : resourceName;
+  };
+
+  const getBaseRate = (resourceName) => {
+    const resource = oresData.find((ore) => ore.name === resourceName);
+    return resource ? resource.baseRate : 1;
   };
 
   return (
@@ -31,7 +36,7 @@ function ResourceExtractor() {
             <Button
               key={resource}
               variant="dark"
-              onClick={() => extractResource(resource)}
+              onClick={() => extractResource(resource, getBaseRate(resource))}
             >
               Extract {getDisplayName(resource)} ({state.resources[resource]})
             </Button>

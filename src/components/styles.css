@@ -1,0 +1,11 @@
+.disabled-product {
+  background-color: #3a3a3a;
+}
+.disabled-product .card-body {
+  background-color: #f8f8f8;
+}
+.disabled-product .btn {
+  background-color: gray;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
