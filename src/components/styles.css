@@ -9,3 +9,48 @@
   border-color: #ccc;
   cursor: not-allowed;
 }
+.queue-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 300px; /* Adjust this as needed */
+}
+
+.queue-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px; /* Adjust as needed */
+  z-index: 1000; /* Make sure it's above other elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for a notification look */
+  border-radius: 8px; /* Rounded corners */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

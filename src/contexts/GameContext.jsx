@@ -1,3 +1,4 @@
+// GameContext.jsx
 import React, { createContext, useReducer } from "react";
 import oresData from "../data/ores.json";
 
@@ -38,15 +39,17 @@ const gameReducer = (state, action) => {
           [action.resource]: state.resources[action.resource] - action.amount,
         },
       };
-    case "CRAFT_PRODUCT":
+    case "CRAFT_PRODUCT": {
+      const productName = action.product.name;
+      console.log("🚀 ~ gameReducer ~ productName:", productName);
       return {
         ...state,
         products: {
           ...state.products,
-          [action.product]:
-            state.products[action.product] + action.outputQuantity,
+          [productName]: (state.products[productName] || 0) + 1,
         },
       };
+    }
     case "DEDUCT_RESOURCE":
       return {
         ...state,
@@ -74,7 +77,6 @@ const gameReducer = (state, action) => {
     case "START_BUILDING_MACHINE":
       return {
         ...state,
-        // Start the building process
         building: {
           machine: action.machine,
           remainingTime: action.time,
@@ -83,7 +85,6 @@ const gameReducer = (state, action) => {
     case "COMPLETE_BUILDING_MACHINE":
       return {
         ...state,
-        // Complete the building process
         machines: {
           ...state.machines,
           [action.machine]: (state.machines[action.machine] || 0) + 1,
