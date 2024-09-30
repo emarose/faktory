@@ -7,6 +7,7 @@ import Queue from "./components/Queue";
 import { GameContext } from "./contexts/GameContext"; // Import GameContext
 import "bootstrap/dist/css/bootstrap.min.css";
 import BuiltMachines from "./components/BuiltMachines";
+import MachineQueue from "./components/MachineQueue";
 
 function App() {
   const [queue, setQueue] = useState([]); // State for the queue
@@ -28,10 +29,9 @@ function App() {
 
           // Reset crafting state to prepare for the next product
           setCrafting(null);
-
           return 0;
         }
-        return prevTime - 1;
+        return prevTime - 1; // Decrease time
       });
     }, 1000);
 
@@ -53,6 +53,11 @@ function App() {
 
       {/* Render Queue as an independent element to avoid layout shift */}
       <Queue queue={queue} crafting={crafting} remainingTime={remainingTime} />
+      <MachineQueue
+        queue={queue}
+        crafting={crafting}
+        remainingTime={remainingTime}
+      />
 
       <div className="row mb-2">
         <div className="col-md-6">

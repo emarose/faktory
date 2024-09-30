@@ -3,40 +3,120 @@
     "name": "furnace",
     "displayName": "Furnace",
     "type": "machine",
-    "buildCost": [
-      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 5 },
-      { "name": "coal", "displayName": "Coal", "amount": 2 }
-    ]
+    "buildCost": [{ "name": "coal", "displayName": "Coal", "amount": 5 }],
+    "processingTime": 3
   },
   {
-    "name": "assembler",
-    "displayName": "Assembler",
+    "name": "bioProcessor",
+    "displayName": "Bio-Processor",
     "type": "machine",
     "buildCost": [
-      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 10 },
-      { "name": "circuit", "displayName": "Circuit", "amount": 2 }
-    ]
+      { "name": "biomass", "displayName": "Biomass", "amount": 10 },
+      { "name": "stone", "displayName": "Stone", "amount": 5 }
+    ],
+    "processingTime": 5
   },
   {
-    "name": "electricFurnace",
-    "displayName": "Electric Furnace",
+    "name": "bioFurnace",
+    "displayName": "Bio-Furnace",
+    "type": "machine",
+    "buildCost": [
+      { "name": "ironIngots", "displayName": "Iron Ingots", "amount": 10 },
+      { "name": "biomass", "displayName": "Biomass", "amount": 10 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "automatedFurnace",
+    "displayName": "Automated Furnace",
+    "type": "machine",
+    "buildCost": [
+      { "name": "steelBars", "displayName": "Steel Bars", "amount": 10 },
+      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "processor",
+    "displayName": "Processor",
+    "type": "machine",
+    "buildCost": [
+      { "name": "steelBars", "displayName": "Steel Bars", "amount": 5 },
+      { "name": "circuits", "displayName": "Circuits", "amount": 10 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "bioMaterialRefinery",
+    "displayName": "Bio-Material Refinery",
+    "type": "machine",
+    "buildCost": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 },
+      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "mechanoidChassis",
+    "displayName": "Mechanoid Chassis",
+    "type": "machine",
+    "buildCost": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 },
+      { "name": "circuits", "displayName": "Circuits", "amount": 10 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "bioMechanicalCore",
+    "displayName": "Bio-Mechanical Core",
     "type": "machine",
     "buildCost": [
       {
-        "name": "advancedCircuit",
-        "displayName": "Advanced Circuit",
-        "amount": 2
+        "name": "advancedBioComponents",
+        "displayName": "Advanced Bio-Components",
+        "amount": 5
       },
-      { "name": "steelPlate", "displayName": "Steel Plate", "amount": 4 }
-    ]
+      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
+    ],
+    "processingTime": 5
   },
   {
-    "name": "roboticAssembler",
-    "displayName": "Robotic Assembler",
+    "name": "mechBioUnit",
+    "displayName": "Mech-Bio Unit",
     "type": "machine",
     "buildCost": [
-      { "name": "engineUnit", "displayName": "Engine Unit", "amount": 2 },
-      { "name": "circuit", "displayName": "Circuit", "amount": 5 }
-    ]
+      {
+        "name": "mechanoidChassis",
+        "displayName": "Mechanoid Chassis",
+        "amount": 1
+      },
+      {
+        "name": "bioMechanicalCore",
+        "displayName": "Bio-Mechanical Core",
+        "amount": 1
+      }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "bioEnhancedEnvironmentGenerator",
+    "displayName": "Bio-Enhanced Environment Generator",
+    "type": "machine",
+    "buildCost": [
+      { "name": "mechBioUnit", "displayName": "Mech-Bio Unit", "amount": 1 },
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 }
+    ],
+    "processingTime": 5
+  },
+  {
+    "name": "hybridMachines",
+    "displayName": "Hybrid Machines",
+    "type": "machine",
+    "buildCost": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 5 },
+      { "name": "bioCopper", "displayName": "Bio-Copper", "amount": 5 },
+      { "name": "mechBioUnit", "displayName": "Mech-Bio Unit", "amount": 1 }
+    ],
+    "processingTime": 5
   }
 ]

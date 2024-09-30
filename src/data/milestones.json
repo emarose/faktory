@@ -1,52 +1,52 @@
 [
   {
-    "milestone": "first_iron_plate",
-    "description": "Craft 10 Iron Plates",
-    "requiredAmount": 10,
-    "resource": "ironPlate",
-    "reward": {
-      "researchPoints": 10,
-      "unlocks": "Steel Plate Recipe"
-    }
-  },
-  {
-    "milestone": "first_circuit",
-    "description": "Craft 5 Circuits",
-    "requiredAmount": 5,
-    "resource": "circuit",
-    "reward": {
-      "researchPoints": 20,
-      "unlocks": "Advanced Circuit Recipe"
-    }
-  },
-  {
     "milestone": "build_furnace",
-    "description": "Build your first Furnace",
+    "description": "Build the first Furnace",
     "requiredAmount": 1,
     "resource": "furnace",
     "reward": {
+      "researchPoints": 10,
+      "unlocks": "Steel Production"
+    }
+  },
+  {
+    "milestone": "construct_bio_processor",
+    "description": "Construct the Bio-Processor",
+    "requiredAmount": 1,
+    "resource": "bioProcessor",
+    "reward": {
+      "researchPoints": 15,
+      "unlocks": "Bio-Furnace"
+    }
+  },
+  {
+    "milestone": "build_bio_furnace",
+    "description": "Build the Bio-Furnace",
+    "requiredAmount": 1,
+    "resource": "bioFurnace",
+    "reward": {
+      "researchPoints": 20,
+      "unlocks": "Mechanoid Chassis"
+    }
+  },
+  {
+    "milestone": "create_mech_bio_unit",
+    "description": "Create the first Mech-Bio Unit",
+    "requiredAmount": 1,
+    "resource": "mechBioUnit",
+    "reward": {
       "researchPoints": 30,
-      "unlocks": "Assembler Recipe"
+      "unlocks": "Bio-Enhanced Environment Generator"
     }
   },
   {
-    "milestone": "build_assembler",
-    "description": "Build your first Assembler",
+    "milestone": "activate_bio_environment",
+    "description": "Activate the Bio-Enhanced Environment",
     "requiredAmount": 1,
-    "resource": "assembler",
+    "resource": "bioEnhancedEnvironmentGenerator",
     "reward": {
-      "researchPoints": 50,
-      "unlocks": "Electric Furnace Recipe"
-    }
-  },
-  {
-    "milestone": "advanced_machines",
-    "description": "Build Electric Furnace or Robotic Assembler",
-    "requiredAmount": 1,
-    "resource": "electricFurnace",
-    "reward": {
-      "researchPoints": 100,
-      "unlocks": "Robotics Research"
+      "researchPoints": 40,
+      "unlocks": "Hybrid Machines"
     }
   }
 ]

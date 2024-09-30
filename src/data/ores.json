@@ -16,5 +16,17 @@
     "displayName": "Coal",
     "type": "resource",
     "baseRate": 1
+  },
+  {
+    "name": "stone",
+    "displayName": "Stone",
+    "type": "resource",
+    "baseRate": 1
+  },
+  {
+    "name": "biomass",
+    "displayName": "Biomass",
+    "type": "resource",
+    "baseRate": 1
   }
 ]

@@ -1,61 +1,239 @@
 [
   {
-    "name": "ironPlate",
-    "displayName": "Iron Plate",
+    "name": "ironIngot",
+    "displayName": "Iron Ingot",
     "type": "product",
     "ingredients": [
-      { "name": "ironOre", "displayName": "Iron Ore", "amount": 2 }
+      { "name": "ironOre", "displayName": "Iron Ore", "amount": 1 }
     ],
     "machineRequired": "furnace",
     "processingTime": 2,
-    "outputQuantity": 1
+    "outputQuantity": 1,
+    "tier": 2
   },
   {
-    "name": "copperWire",
-    "displayName": "Copper Wire",
+    "name": "copperIngot",
+    "displayName": "Copper Ingot",
     "type": "product",
     "ingredients": [
       { "name": "copperOre", "displayName": "Copper Ore", "amount": 1 }
     ],
     "machineRequired": "furnace",
+    "processingTime": 2,
+    "outputQuantity": 1,
+    "tier": 2
+  },
+  {
+    "name": "organicFuel",
+    "displayName": "Organic Fuel",
+    "type": "product",
+    "ingredients": [
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 }
+    ],
+    "machineRequired": "bioProcessor",
     "processingTime": 3,
-    "outputQuantity": 1
+    "outputQuantity": 1,
+    "tier": 2
   },
   {
-    "name": "circuit",
-    "displayName": "Circuit",
+    "name": "basicBioComponents",
+    "displayName": "Basic Bio-components",
     "type": "product",
     "ingredients": [
-      { "name": "copperWire", "displayName": "Copper Wire", "amount": 2 },
-      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 1 }
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 }
     ],
-    "machineRequired": "assembler",
-    "processingTime": 5,
-    "outputQuantity": 1
+    "machineRequired": "bioProcessor",
+    "processingTime": 3,
+    "outputQuantity": 1,
+    "tier": 2
   },
   {
-    "name": "advancedCircuit",
-    "displayName": "Advanced Circuit",
+    "name": "steel",
+    "displayName": "Steel",
     "type": "product",
     "ingredients": [
-      { "name": "circuit", "displayName": "Circuit", "amount": 2 },
-      { "name": "copperWire", "displayName": "Copper Wire", "amount": 4 },
-      { "name": "steelPlate", "displayName": "Steel Plate", "amount": 1 }
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 }
     ],
-    "machineRequired": "assembler",
-    "processingTime": 6,
-    "outputQuantity": 1
-  },
-  {
-    "name": "steelPlate",
-    "displayName": "Steel Plate",
-    "type": "product",
-    "ingredients": [
-      { "name": "ironOre", "displayName": "Iron Ore", "amount": 3 },
-      { "name": "coal", "displayName": "Coal", "amount": 2 }
-    ],
-    "machineRequired": "furnace",
+    "machineRequired": "steelRefinery",
     "processingTime": 4,
-    "outputQuantity": 1
+    "outputQuantity": 1,
+    "tier": 3
+  },
+  {
+    "name": "circuits",
+    "displayName": "Circuits",
+    "type": "product",
+    "ingredients": [
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 2 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 2 }
+    ],
+    "machineRequired": "processor",
+    "processingTime": 3,
+    "outputQuantity": 2,
+    "tier": 3
+  },
+  {
+    "name": "bioIron",
+    "displayName": "Bio-Iron",
+    "type": "product",
+    "ingredients": [
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 },
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 }
+    ],
+    "machineRequired": "bioFurnace",
+    "processingTime": 4,
+    "outputQuantity": 1,
+    "tier": 3
+  },
+  {
+    "name": "bioCopper",
+    "displayName": "Bio-Copper",
+    "type": "product",
+    "ingredients": [
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 1 }
+    ],
+    "machineRequired": "bioFurnace",
+    "processingTime": 4,
+    "outputQuantity": 1,
+    "tier": 3
+  },
+  {
+    "name": "bioSteel",
+    "displayName": "Bio-Steel",
+    "type": "product",
+    "ingredients": [
+      { "name": "bioIron", "displayName": "Bio-Iron", "amount": 1 },
+      { "name": "bioCopper", "displayName": "Bio-Copper", "amount": 1 }
+    ],
+    "machineRequired": "bioFurnace",
+    "processingTime": 5,
+    "outputQuantity": 1,
+    "tier": 3
+  },
+  {
+    "name": "advancedCircuits",
+    "displayName": "Advanced Circuits",
+    "type": "product",
+    "ingredients": [
+      { "name": "circuits", "displayName": "Circuits", "amount": 1 },
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 1 }
+    ],
+    "machineRequired": "advancedProcessor",
+    "processingTime": 3,
+    "outputQuantity": 1,
+    "tier": 4
+  },
+  {
+    "name": "advancedBioComponents",
+    "displayName": "Advanced Bio-components",
+    "type": "product",
+    "ingredients": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 1 }
+    ],
+    "machineRequired": "bioMaterialRefinery",
+    "processingTime": 4,
+    "outputQuantity": 1,
+    "tier": 4
+  },
+  {
+    "name": "bioMechanicalCore",
+    "displayName": "Bio-Mechanical Core",
+    "type": "product",
+    "ingredients": [
+      {
+        "name": "advancedBioComponents",
+        "displayName": "Advanced Bio-components",
+        "amount": 1
+      },
+      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
+    ],
+    "machineRequired": "mechanoidBuilder",
+    "processingTime": 6,
+    "outputQuantity": 1,
+    "tier": 5
+  },
+  {
+    "name": "mechBioUnit",
+    "displayName": "Mech-Bio Unit",
+    "type": "product",
+    "ingredients": [
+      {
+        "name": "bioMechanicalCore",
+        "displayName": "Bio-Mechanical Core",
+        "amount": 1
+      },
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 1 },
+      {
+        "name": "advancedBioComponents",
+        "displayName": "Advanced Bio-components",
+        "amount": 1
+      }
+    ],
+    "machineRequired": "mechanoidBuilder",
+    "processingTime": 8,
+    "outputQuantity": 1,
+    "tier": 5
+  },
+  {
+    "name": "enhancedBioSteel",
+    "displayName": "Enhanced Bio-Steel",
+    "type": "product",
+    "ingredients": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 1 },
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 }
+    ],
+    "machineRequired": "bioEnhancedEnvironmentGenerator",
+    "processingTime": 5,
+    "outputQuantity": 1,
+    "tier": 6
+  },
+  {
+    "name": "bioEnhancedCore",
+    "displayName": "Bio-Enhanced Core",
+    "type": "product",
+    "ingredients": [
+      {
+        "name": "bioMechanicalCore",
+        "displayName": "Bio-Mechanical Core",
+        "amount": 1
+      },
+      { "name": "biomass", "displayName": "Biomass", "amount": 1 }
+    ],
+    "machineRequired": "bioEnhancedEnvironmentGenerator",
+    "processingTime": 5,
+    "outputQuantity": 1,
+    "tier": 6
+  },
+  {
+    "name": "hybridMachineComponent",
+    "displayName": "Hybrid Machine Component",
+    "type": "product",
+    "ingredients": [
+      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 1 },
+      { "name": "bioCopper", "displayName": "Bio-Copper", "amount": 1 },
+      { "name": "mechBioUnit", "displayName": "Mech-Bio Unit", "amount": 1 }
+    ],
+    "machineRequired": "hybridMachines",
+    "processingTime": 6,
+    "outputQuantity": 1,
+    "tier": 6
+  },
+  {
+    "name": "hybridUnit",
+    "displayName": "Hybrid Unit",
+    "type": "product",
+    "ingredients": [
+      {
+        "name": "hybridMachineComponent",
+        "displayName": "Hybrid Machine Component",
+        "amount": 1
+      },
+      { "name": "circuits", "displayName": "Circuits", "amount": 1 }
+    ],
+    "machineRequired": "hybridMachines",
+    "processingTime": 6,
+    "outputQuantity": 1,
+    "tier": 6
   }
 ]

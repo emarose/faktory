@@ -16,22 +16,32 @@
   z-index: 1000;
   width: 300px; /* Adjust this as needed */
 }
-
 .queue-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   animation: fadeIn 0.5s ease-in-out;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.machine-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* Responsive grid */
+  gap: 1rem; /* Space between cards */
+}
+.machine-item {
+  text-align: center; /* Center content */
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* Responsive grid */
+  gap: 1rem; /* Space between cards */
+}
+.product-item {
+  text-align: center; /* Center content */
 }
 .fixed-bottom-right {
   position: fixed;
