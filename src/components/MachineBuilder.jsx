@@ -4,7 +4,7 @@ import milestonesData from "../data/milestones.json";
 import { GameContext } from "../contexts/GameContext";
 import { Button, Card } from "react-bootstrap";
 import MachineQueue from "./MachineQueue";
-import "bootstrap/dist/css/bootstrap.min.css";
+import machineSprites from "../assets/machines.png";
 import "./styles.css";
 
 function MachineBuilder() {
@@ -72,8 +72,6 @@ function MachineBuilder() {
           milestone.resource === machine.name &&
           !state.milestones[milestone.milestone]
         ) {
-          console.log(`Checking milestone for machine: ${machine.name}`);
-          console.log("Milestone Data:", milestone);
           achieveMilestone(milestone);
         }
       });
@@ -83,26 +81,37 @@ function MachineBuilder() {
   }, [buildingQueue, dispatch]);
 
   const achieveMilestone = (milestone) => {
-    console.log("Achieving milestone:", milestone);
     dispatch({
       type: "COMPLETE_MILESTONE",
       milestone: milestone.milestone,
     });
 
     alert(
-      `Milestone Achieved: ${milestone.description}!\nRewards:\n- ${milestone.reward.researchPoints} Research Points\n- Unlocks: ${milestone.reward.unlocks}`
+      `Milestone Achieved: ${milestone.description}!\nRewards:\n- Unlocks: ${milestone.reward.unlocks}`
     );
+  };
+
+  const getMachineStyle = (index) => {
+    const row = Math.floor(index / 5);
+    const column = index % 5;
+    const xOffset = column * -128;
+    const yOffset = row * -140;
+
+    return {
+      width: "140px",
+      height: "140px",
+      backgroundImage: `url(${machineSprites})`,
+      backgroundPosition: `${xOffset}px ${yOffset}px`,
+    };
   };
 
   return (
     <>
       <Card className="machine-card">
         <Card.Header>Available Machines</Card.Header>
-        <Card.Subtitle className="text-muted px-3 pt-3">
-          MachineBuilder
-        </Card.Subtitle>
+
         <div className="machine-grid">
-          {machinesData.map((machine) => {
+          {machinesData.map((machine, index) => {
             const isBuildable = machine.buildCost.every((ingredient) => {
               const availableAmount = state.resources[ingredient.name] || 0;
               const availableProducts = state.products[ingredient.name] || 0;
@@ -110,8 +119,12 @@ function MachineBuilder() {
             });
 
             return (
-              <Card key={machine.name} className="machine-item">
+              <Card key={machine.name} className="machine-item shadow-sm ">
                 <Card.Body>
+                  <div
+                    className="text-center "
+                    style={getMachineStyle(index)}
+                  ></div>
                   <Card.Title>{machine.displayName}</Card.Title>
                   <p>Build Cost:</p>
                   <ul>

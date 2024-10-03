@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
+import { GameContext } from "./contexts/GameContext";
 import ResourceExtractor from "./components/ResourceExtractor";
 import Processor from "./components/Processor";
 import MachineBuilder from "./components/MachineBuilder";
 import ProductBuilder from "./components/ProductBuilder";
 import Queue from "./components/Queue";
-import { GameContext } from "./contexts/GameContext"; // Import GameContext
-import "bootstrap/dist/css/bootstrap.min.css";
 import BuiltMachines from "./components/BuiltMachines";
 import MachineQueue from "./components/MachineQueue";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [queue, setQueue] = useState([]); // State for the queue
-  const [crafting, setCrafting] = useState(null); // State for currently crafting product
-  const [remainingTime, setRemainingTime] = useState(0); // Time left for crafting
+  const [queue, setQueue] = useState([]);
+  const [crafting, setCrafting] = useState(null);
+  const [remainingTime, setRemainingTime] = useState(0);
 
-  // Wrap useContext in a check to avoid undefined issues
-  const { dispatch } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
 
   useEffect(() => {
     if (!crafting) return;
@@ -23,22 +22,20 @@ function App() {
     let timer = setInterval(() => {
       setRemainingTime((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(timer); // Clear the timer immediately
-          setQueue((prevQueue) => prevQueue.slice(1)); // Remove completed product from queue
+          clearInterval(timer);
+          setQueue((prevQueue) => prevQueue.slice(1));
           dispatch({ type: "CRAFT_PRODUCT", product: crafting });
 
-          // Reset crafting state to prepare for the next product
           setCrafting(null);
           return 0;
         }
-        return prevTime - 1; // Decrease time
+        return prevTime - 1;
       });
     }, 1000);
 
-    return () => clearInterval(timer); // Clean up on component unmount or dependency change
+    return () => clearInterval(timer);
   }, [crafting, dispatch]);
 
-  // Automatically start the next product when the queue changes and nothing is crafting
   useEffect(() => {
     if (queue.length > 0 && !crafting && remainingTime === 0) {
       const nextProduct = queue[0];
@@ -47,11 +44,15 @@ function App() {
     }
   }, [queue, crafting, remainingTime]);
 
+  // Determine if any processed products are available
+  const hasProcessedProducts = Object.values(state.products || {}).some(
+    (amount) => amount > 0
+  );
+
   return (
     <div className="container">
       <h2 className="text-center my-4">Faktory</h2>
 
-      {/* Render Queue as an independent element to avoid layout shift */}
       <Queue queue={queue} crafting={crafting} remainingTime={remainingTime} />
       <MachineQueue
         queue={queue}
@@ -63,9 +64,7 @@ function App() {
         <div className="col-md-6">
           <ResourceExtractor />
         </div>
-        <div className="col-md-6">
-          <Processor />
-        </div>
+        <div className="col-md-6">{hasProcessedProducts && <Processor />}</div>
       </div>
 
       <div className="row">
