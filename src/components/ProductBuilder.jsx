@@ -3,7 +3,9 @@ import { GameContext } from "../contexts/GameContext";
 import { Button, Card } from "react-bootstrap";
 import productsData from "../data/products.json";
 import milestonesData from "../data/milestones.json";
+import Icon from "./Icon";
 import "./styles.css";
+import { IoHammer } from "react-icons/io5";
 
 function ProductBuilder({ setQueue, crafting }) {
   const { state, dispatch } = useContext(GameContext);
@@ -47,14 +49,6 @@ function ProductBuilder({ setQueue, crafting }) {
 
     // Check for milestones
     milestonesData.forEach((milestone) => {
-      console.log("Current product count:", state.products[product.name]);
-      console.log("Milestone required amount:", milestone.requiredAmount);
-      console.log("Milestone resource:", milestone.resource);
-      console.log(
-        "Milestone achieved status:",
-        state.milestones[milestone.milestone]
-      );
-
       if (
         state.products[product.name] >= milestone.requiredAmount &&
         milestone.resource === product.name &&
@@ -78,56 +72,60 @@ function ProductBuilder({ setQueue, crafting }) {
     );
   };
 
+  const availableProducts = productsData.filter((product) => {
+    const isTierUnlocked = state.unlockedTiers[`tier${product.tier}`];
+
+    const isMachineRequiredBuilt =
+      !product.machineRequired || !!state.machines[product.machineRequired];
+
+    return isTierUnlocked && isMachineRequiredBuilt;
+  });
+
+  if (availableProducts.length === 0) {
+    return null;
+  }
+
   return (
     <Card className="product-card">
-      <Card.Header>Available Products</Card.Header>
-      <Card.Subtitle className="text-muted px-3 pt-3">
-        ProductBuilder
-      </Card.Subtitle>
+      <Card.Header>Product Builder</Card.Header>
+
       <div className="product-grid">
-        {productsData
-          .filter((product) => {
-            // Check if the tier is unlocked
-            const isTierUnlocked = state.unlockedTiers[`tier${product.tier}`];
-            // Check if the machine required is built
-            const isMachineRequiredBuilt =
-              !product.machineRequired ||
-              !!state.machines[product.machineRequired];
+        {availableProducts.map((product) => {
+          const isBuildable = canBuildProduct(product);
+          const isCrafting = crafting && crafting.name === product.name;
 
-            return isTierUnlocked && isMachineRequiredBuilt; // Show only products for unlocked tiers and machines built
-          })
-          .map((product) => {
-            const isBuildable = canBuildProduct(product);
-            const isCrafting = crafting && crafting.name === product.name;
-
-            return (
-              <Card key={product.name} className="m-2 product-item">
-                <Card.Body className="p-2">
+          return (
+            <Card key={product.name} className="m-2 product-item">
+              <Card.Body className="p-2 align-items-center d-flex flex-column">
+                <div className="d-flex flex-column align-items-center mt-2">
+                  <Icon name={product.name} />
                   <Card.Title>{product.displayName}</Card.Title>
-                  <ul>
-                    {product.ingredients.map((ingredient) => (
-                      <small key={ingredient.name}>
-                        {ingredient.amount}x {ingredient.displayName}
-                      </small>
-                    ))}
-                  </ul>
-                  <Button
-                    size="sm"
-                    variant="dark"
-                    onClick={() => addProductToQueue(product)}
-                    disabled={!isBuildable}
-                  >
-                    {isCrafting
-                      ? "Crafting..."
-                      : `Craft ${product.displayName}`}
-                  </Button>
-                  {!isBuildable && (
-                    <p className="mt-1 small text-danger">Missing materials</p>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })}
+                </div>
+                <ul>
+                  {product.ingredients.map((ingredient) => (
+                    <small key={ingredient.name}>
+                      {ingredient.amount}x {ingredient.displayName}
+                    </small>
+                  ))}
+                </ul>
+                <Button
+                  style={{
+                    padding: 10,
+                    borderRadius: "50%",
+                    display: "grid",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  variant="dark"
+                  onClick={() => addProductToQueue(product)}
+                  disabled={!isBuildable || !!crafting}
+                >
+                  <IoHammer size={24} />
+                </Button>
+              </Card.Body>
+            </Card>
+          );
+        })}
       </div>
     </Card>
   );

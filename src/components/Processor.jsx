@@ -23,17 +23,17 @@ function Processor() {
 
   return (
     <Card className="m-3 shadow-sm position-relative">
-      <Card.Header className="bg-dark text-light">
-        Processed Products
-      </Card.Header>
-      <p>Processor</p>
+      <Card.Header className="">Processed Products</Card.Header>
+
       <Card.Body>
         <div className="d-flex flex-wrap gap-4">
           {productsData
             .filter(
               (product) =>
-                product.type === "product" && canBuildProduct(product)
+                product.type === "product" &&
+                (state.products[product.name] || canBuildProduct(product))
             )
+
             .map((product) => {
               const amount = state.products[product.name] || 0;
 

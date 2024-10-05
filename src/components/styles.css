@@ -58,6 +58,32 @@
   background-size: auto;
   margin-bottom: 10px;
 }
+.grayscale {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.hammer-button {
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.hammer-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+.hammer-button.crafting {
+  background-color: #ffa500; /* You can choose another color to represent crafting state */
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -7,6 +7,7 @@ import ProductBuilder from "./components/ProductBuilder";
 import Queue from "./components/Queue";
 import BuiltMachines from "./components/BuiltMachines";
 import MachineQueue from "./components/MachineQueue";
+import productsData from "./data/products.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -49,10 +50,27 @@ function App() {
     (amount) => amount > 0
   );
 
-  return (
-    <div className="container">
-      <h2 className="text-center my-4">Faktory</h2>
+  // Determine if any machine is built
+  const hasMachinesBuilt = Object.values(state.machines || {}).some(
+    (amount) => amount > 0
+  );
 
+  // Determine if there are any products available to craft
+  const getAvailableProducts = () => {
+    return productsData.filter((product) => {
+      const isTierUnlocked = state.unlockedTiers[`tier${product.tier}`];
+
+      const isMachineRequiredBuilt =
+        !product.machineRequired || !!state.machines[product.machineRequired];
+
+      return isTierUnlocked && isMachineRequiredBuilt;
+    });
+  };
+
+  const availableProducts = getAvailableProducts();
+
+  return (
+    <div className="container-fluid bg-dark" style={{ minHeight: "100vh" }}>
       <Queue queue={queue} crafting={crafting} remainingTime={remainingTime} />
       <MachineQueue
         queue={queue}
@@ -61,25 +79,32 @@ function App() {
       />
 
       <div className="row mb-2">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <ResourceExtractor />
         </div>
-        <div className="col-md-6">{hasProcessedProducts && <Processor />}</div>
       </div>
-
-      <div className="row">
-        <div className="col-md-6">
-          <ProductBuilder
-            queue={queue}
-            setQueue={setQueue}
-            crafting={crafting}
-            setCrafting={setCrafting}
-            setRemainingTime={setRemainingTime}
-          />
+      <div className="row mb-2">
+        <div className="col-md-12">{hasProcessedProducts && <Processor />}</div>
+      </div>
+      <div className="row mb-2">
+        <div className="col-md-12">{hasMachinesBuilt && <BuiltMachines />}</div>
+      </div>
+      <div className="row mb-2">
+        <div className="col-md-12">
+          {availableProducts.length > 0 && (
+            <ProductBuilder
+              queue={queue}
+              setQueue={setQueue}
+              crafting={crafting}
+              setCrafting={setCrafting}
+              setRemainingTime={setRemainingTime}
+            />
+          )}
         </div>
-        <div className="col-md-6">
+      </div>
+      <div className="row mb-2">
+        <div className="col-md-12">
           <MachineBuilder />
-          <BuiltMachines />
         </div>
       </div>
     </div>

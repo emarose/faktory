@@ -13,7 +13,7 @@ const initialState = {
   milestones: { build_furnace: false },
   unlockedTiers: {
     tier1: true,
-    tier2: true,
+    tier2: false,
     tier3: false,
     tier4: false,
     tier5: false,

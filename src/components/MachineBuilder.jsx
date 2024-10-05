@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import machinesData from "../data/machines.json";
-import milestonesData from "../data/milestones.json";
 import { GameContext } from "../contexts/GameContext";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Tooltip, OverlayTrigger } from "react-bootstrap";
 import MachineQueue from "./MachineQueue";
 import machineSprites from "../assets/machines.png";
 import "./styles.css";
+import { IoHammer } from "react-icons/io5";
 
 function MachineBuilder() {
   const { state, dispatch } = useContext(GameContext);
@@ -62,34 +62,13 @@ function MachineBuilder() {
       setCrafting(null);
       dispatch({
         type: "BUILD_MACHINE",
-        machine: machine.name,
+        machine: machine.displayName,
       });
       setBuildingQueue((prevQueue) => prevQueue.slice(1));
-
-      // Check for milestone completion
-      milestonesData.forEach((milestone) => {
-        if (
-          milestone.resource === machine.name &&
-          !state.milestones[milestone.milestone]
-        ) {
-          achieveMilestone(milestone);
-        }
-      });
     }, buildTime * 1000);
 
     return () => clearTimeout(timer);
   }, [buildingQueue, dispatch]);
-
-  const achieveMilestone = (milestone) => {
-    dispatch({
-      type: "COMPLETE_MILESTONE",
-      milestone: milestone.milestone,
-    });
-
-    alert(
-      `Milestone Achieved: ${milestone.description}!\nRewards:\n- Unlocks: ${milestone.reward.unlocks}`
-    );
-  };
 
   const getMachineStyle = (index) => {
     const row = Math.floor(index / 5);
@@ -105,50 +84,87 @@ function MachineBuilder() {
     };
   };
 
+  const unlockedTier = Object.keys(state.unlockedTiers).filter(
+    (tier) => state.unlockedTiers[tier]
+  ).length;
+
+  const availableMachines = machinesData.filter(
+    (machine) => machine.tier <= unlockedTier
+  );
+
   return (
     <>
       <Card className="machine-card">
         <Card.Header>Available Machines</Card.Header>
 
-        <div className="machine-grid">
-          {machinesData.map((machine, index) => {
+        <div className="machine-grid m-2">
+          {availableMachines.map((machine, index) => {
             const isBuildable = machine.buildCost.every((ingredient) => {
               const availableAmount = state.resources[ingredient.name] || 0;
               const availableProducts = state.products[ingredient.name] || 0;
               return availableAmount + availableProducts >= ingredient.amount;
             });
 
+            const renderTooltip = (props) => (
+              <Tooltip id="machine-output-tooltip" {...props}>
+                Outputs:
+                <ul className="m-0 p-0 list-unstyled">
+                  {machine.outputs.map((output) => (
+                    <li key={output.name}>
+                      {machine.buildCost.map((cost, idx) => (
+                        <React.Fragment key={cost.name}>
+                          {idx > 0 && ", "}
+                          {cost.displayName}
+                        </React.Fragment>
+                      ))}{" "}
+                      &gt; {output.displayName}
+                    </li>
+                  ))}
+                </ul>
+              </Tooltip>
+            );
+
             return (
-              <Card key={machine.name} className="machine-item shadow-sm ">
-                <Card.Body>
-                  <div
-                    className="text-center "
-                    style={getMachineStyle(index)}
-                  ></div>
-                  <Card.Title>{machine.displayName}</Card.Title>
-                  <p>Build Cost:</p>
-                  <ul>
-                    {machine.buildCost.map((cost) => (
-                      <li key={cost.name}>
-                        {cost.amount}x {cost.displayName}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    size="sm"
-                    variant="dark"
-                    onClick={() => buildMachine(machine)}
-                    disabled={!isBuildable || !!crafting}
-                  >
-                    {crafting?.machine === machine
-                      ? `Building...`
-                      : `Build ${machine.displayName}`}
-                  </Button>
-                  {!isBuildable && (
-                    <p className="mt-1 small text-danger">Missing materials</p>
-                  )}
-                </Card.Body>
-              </Card>
+              <OverlayTrigger
+                key={machine.name}
+                placement="top"
+                overlay={renderTooltip}
+              >
+                <Card className="machine-item shadow-sm">
+                  <Card.Body className="d-flex flex-column align-items-center">
+                    <div
+                      className={`text-center ${
+                        !isBuildable ? "grayscale" : ""
+                      }`}
+                      style={getMachineStyle(index)}
+                    ></div>
+                    <Card.Title>{machine.displayName}</Card.Title>
+
+                    <p className="mb-0">Build Cost:</p>
+                    <ul>
+                      {machine.buildCost.map((cost) => (
+                        <li key={cost.name}>
+                          {cost.amount}x {cost.displayName}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      style={{
+                        padding: 10,
+                        borderRadius: "50%",
+                        display: "grid",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      variant="dark"
+                      onClick={() => buildMachine(machine)}
+                      disabled={!isBuildable || !!crafting}
+                    >
+                      <IoHammer size={24} />
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </OverlayTrigger>
             );
           })}
         </div>

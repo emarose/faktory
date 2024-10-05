@@ -56,9 +56,7 @@ function ResourceExtractor() {
 
   return (
     <Card className="m-3 shadow-sm">
-      <Card.Header className="bg-dark text-light">
-        Extract Resources
-      </Card.Header>
+      <Card.Header className="">Extract Resources</Card.Header>
       <Card.Body>
         <div className="d-flex flex-wrap gap-3 position-relative">
           {Object.keys(state.resources).map((resource, index) => {

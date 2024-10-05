@@ -6,10 +6,10 @@
     "ingredients": [
       { "name": "ironOre", "displayName": "Iron Ore", "amount": 1 }
     ],
-    "machineRequired": "furnace",
+    "machineRequired": "Furnace",
     "processingTime": 2,
     "outputQuantity": 1,
-    "tier": 2
+    "tier": 1
   },
   {
     "name": "copperIngot",
@@ -18,10 +18,10 @@
     "ingredients": [
       { "name": "copperOre", "displayName": "Copper Ore", "amount": 1 }
     ],
-    "machineRequired": "furnace",
+    "machineRequired": "Furnace",
     "processingTime": 2,
     "outputQuantity": 1,
-    "tier": 2
+    "tier": 1
   },
   {
     "name": "organicFuel",
@@ -30,7 +30,7 @@
     "ingredients": [
       { "name": "biomass", "displayName": "Biomass", "amount": 1 }
     ],
-    "machineRequired": "bioProcessor",
+    "machineRequired": "BioProcessor",
     "processingTime": 3,
     "outputQuantity": 1,
     "tier": 2
@@ -42,7 +42,7 @@
     "ingredients": [
       { "name": "biomass", "displayName": "Biomass", "amount": 1 }
     ],
-    "machineRequired": "bioProcessor",
+    "machineRequired": "BioProcessor",
     "processingTime": 3,
     "outputQuantity": 1,
     "tier": 2
@@ -54,7 +54,7 @@
     "ingredients": [
       { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 }
     ],
-    "machineRequired": "steelRefinery",
+    "machineRequired": "SteelRefinery",
     "processingTime": 4,
     "outputQuantity": 1,
     "tier": 3
@@ -67,7 +67,7 @@
       { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 2 },
       { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 2 }
     ],
-    "machineRequired": "processor",
+    "machineRequired": "Processor",
     "processingTime": 3,
     "outputQuantity": 2,
     "tier": 3
@@ -80,7 +80,7 @@
       { "name": "biomass", "displayName": "Biomass", "amount": 1 },
       { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 }
     ],
-    "machineRequired": "bioFurnace",
+    "machineRequired": "BioFurnace",
     "processingTime": 4,
     "outputQuantity": 1,
     "tier": 3
@@ -93,7 +93,7 @@
       { "name": "biomass", "displayName": "Biomass", "amount": 1 },
       { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 1 }
     ],
-    "machineRequired": "bioFurnace",
+    "machineRequired": "BioFurnace",
     "processingTime": 4,
     "outputQuantity": 1,
     "tier": 3
@@ -106,7 +106,7 @@
       { "name": "bioIron", "displayName": "Bio-Iron", "amount": 1 },
       { "name": "bioCopper", "displayName": "Bio-Copper", "amount": 1 }
     ],
-    "machineRequired": "bioFurnace",
+    "machineRequired": "BioFurnace",
     "processingTime": 5,
     "outputQuantity": 1,
     "tier": 3

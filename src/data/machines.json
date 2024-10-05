@@ -3,120 +3,101 @@
     "name": "furnace",
     "displayName": "Furnace",
     "type": "machine",
-    "buildCost": [{ "name": "coal", "displayName": "Coal", "amount": 5 }],
-    "processingTime": 3
+    "tier": 1,
+    "buildCost": [
+      { "name": "coal", "displayName": "Coal", "amount": 5 },
+      { "name": "ironOre", "displayName": "Iron Ore", "amount": 10 }
+    ],
+    "processingTime": 3,
+    "outputs": [
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 1 }
+    ],
+    "inputs": [{ "name": "ironOre", "displayName": "Iron Ore" }]
+  },
+  {
+    "name": "assembler",
+    "displayName": "Assembler",
+    "type": "machine",
+    "tier": 1,
+    "buildCost": [
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 5 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 3 }
+    ],
+    "processingTime": 5,
+    "outputs": [
+      { "name": "circuitBoard", "displayName": "Circuit Board", "amount": 2 }
+    ]
+  },
+  {
+    "name": "electricFurnace",
+    "displayName": "Electric Furnace",
+    "type": "machine",
+    "tier": 2,
+    "buildCost": [
+      { "name": "electricMotor", "displayName": "Electric Motor", "amount": 5 },
+      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 20 }
+    ],
+    "processingTime": 6,
+    "outputs": [
+      { "name": "steelIngot", "displayName": "Steel Ingot", "amount": 3 }
+    ]
+  },
+  {
+    "name": "roboticAssembler",
+    "displayName": "Robotic Assembler",
+    "type": "machine",
+    "tier": 2,
+    "buildCost": [
+      {
+        "name": "electricMotor",
+        "displayName": "Electric Motor",
+        "amount": 10
+      },
+      { "name": "circuitBoard", "displayName": "Circuit Board", "amount": 15 }
+    ],
+    "processingTime": 8,
+    "outputs": [
+      {
+        "name": "advancedCircuit",
+        "displayName": "Advanced Circuit",
+        "amount": 1
+      }
+    ]
   },
   {
     "name": "bioProcessor",
     "displayName": "Bio-Processor",
     "type": "machine",
+    "tier": 3,
     "buildCost": [
       { "name": "biomass", "displayName": "Biomass", "amount": 10 },
       { "name": "stone", "displayName": "Stone", "amount": 5 }
     ],
-    "processingTime": 5
+    "processingTime": 5,
+    "outputs": [{ "name": "bioFuel", "displayName": "Bio-Fuel", "amount": 4 }]
   },
   {
-    "name": "bioFurnace",
-    "displayName": "Bio-Furnace",
+    "name": "mechBioAssembler",
+    "displayName": "Mech-Bio Assembler",
     "type": "machine",
+    "tier": 3,
     "buildCost": [
-      { "name": "ironIngots", "displayName": "Iron Ingots", "amount": 10 },
-      { "name": "biomass", "displayName": "Biomass", "amount": 10 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "automatedFurnace",
-    "displayName": "Automated Furnace",
-    "type": "machine",
-    "buildCost": [
-      { "name": "steelBars", "displayName": "Steel Bars", "amount": 10 },
-      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "processor",
-    "displayName": "Processor",
-    "type": "machine",
-    "buildCost": [
-      { "name": "steelBars", "displayName": "Steel Bars", "amount": 5 },
-      { "name": "circuits", "displayName": "Circuits", "amount": 10 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "bioMaterialRefinery",
-    "displayName": "Bio-Material Refinery",
-    "type": "machine",
-    "buildCost": [
-      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 },
-      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "mechanoidChassis",
-    "displayName": "Mechanoid Chassis",
-    "type": "machine",
-    "buildCost": [
-      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 },
-      { "name": "circuits", "displayName": "Circuits", "amount": 10 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "bioMechanicalCore",
-    "displayName": "Bio-Mechanical Core",
-    "type": "machine",
-    "buildCost": [
+      { "name": "bioProcessor", "displayName": "Bio-Processor", "amount": 1 },
       {
-        "name": "advancedBioComponents",
-        "displayName": "Advanced Bio-Components",
-        "amount": 5
+        "name": "electricMotor",
+        "displayName": "Electric Motor",
+        "amount": 15
       },
-      { "name": "circuits", "displayName": "Circuits", "amount": 5 }
+      { "name": "ironPlate", "displayName": "Iron Plate", "amount": 30 }
     ],
-    "processingTime": 5
-  },
-  {
-    "name": "mechBioUnit",
-    "displayName": "Mech-Bio Unit",
-    "type": "machine",
-    "buildCost": [
+    "processingTime": 10,
+    "outputs": [
       {
-        "name": "mechanoidChassis",
-        "displayName": "Mechanoid Chassis",
-        "amount": 1
-      },
-      {
-        "name": "bioMechanicalCore",
-        "displayName": "Bio-Mechanical Core",
+        "name": "mechBioComponent",
+        "displayName": "Mech-Bio Component",
         "amount": 1
       }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "bioEnhancedEnvironmentGenerator",
-    "displayName": "Bio-Enhanced Environment Generator",
-    "type": "machine",
-    "buildCost": [
-      { "name": "mechBioUnit", "displayName": "Mech-Bio Unit", "amount": 1 },
-      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 10 }
-    ],
-    "processingTime": 5
-  },
-  {
-    "name": "hybridMachines",
-    "displayName": "Hybrid Machines",
-    "type": "machine",
-    "buildCost": [
-      { "name": "bioSteel", "displayName": "Bio-Steel", "amount": 5 },
-      { "name": "bioCopper", "displayName": "Bio-Copper", "amount": 5 },
-      { "name": "mechBioUnit", "displayName": "Mech-Bio Unit", "amount": 1 }
-    ],
-    "processingTime": 5
+    ]
   }
 ]
