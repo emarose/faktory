@@ -4,7 +4,6 @@ import "./styles.css";
 
 function MachineQueue({ queue, crafting, remainingTime }) {
   if (queue.length === 0) return null;
-  useEffect(() => {}, [queue, crafting, remainingTime]);
 
   return (
     <div className="queue-container">

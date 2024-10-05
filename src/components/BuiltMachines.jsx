@@ -43,7 +43,7 @@ function BuiltMachines() {
                 className="position-absolute bottom-0 badge badge-pill mb-2 ms-2 "
                 style={{ backgroundColor: "slateblue" }}
               >
-                <hp className="text-light">{machine}</hp>
+                <span className="text-light">{machine}</span>
               </div>
             </div>
           </div>

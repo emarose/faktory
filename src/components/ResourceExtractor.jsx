@@ -34,7 +34,6 @@ function ResourceExtractor() {
       isAnimating: true,
     });
 
-    setIsCursorHidden(true);
     setTimeout(() => {
       setAnimation((prev) => ({ ...prev, isAnimating: false }));
     }, 360);

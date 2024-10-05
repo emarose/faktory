@@ -2,24 +2,24 @@ import React from "react";
 import { ListGroup, Card, ProgressBar } from "react-bootstrap";
 import "./styles.css";
 
-function Queue({ queue, crafting, remainingTime }) {
+function Queue({ title, queue, crafting, remainingTime }) {
   if (queue.length === 0) return null;
 
   return (
     <div className="queue-container">
       <Card className="queue-card">
-        <Card.Header>Queue</Card.Header>
+        <Card.Header>{title}</Card.Header>
         <Card.Body>
           <ListGroup>
-            {queue.map((product, index) => (
+            {queue.map((item, index) => (
               <ListGroup.Item key={index}>
-                {product.displayName}{" "}
-                {index === 0 && crafting && "(In Progress)"}
+                {item.displayName} {index === 0 && crafting && "(In Progress)"}
                 {index === 0 && crafting && (
                   <ProgressBar
                     now={
-                      ((crafting.processingTime - remainingTime) /
-                        crafting.processingTime) *
+                      (((item.processingTime || item.buildTime) -
+                        remainingTime) /
+                        (item.processingTime || item.buildTime)) *
                       100
                     }
                     label={`${remainingTime}s`}

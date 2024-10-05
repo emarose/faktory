@@ -6,7 +6,7 @@
     "tier": 1,
     "buildCost": [
       { "name": "coal", "displayName": "Coal", "amount": 5 },
-      { "name": "ironOre", "displayName": "Iron Ore", "amount": 10 }
+      { "name": "ironOre", "displayName": "Iron Ore", "amount": 5 }
     ],
     "processingTime": 3,
     "outputs": [

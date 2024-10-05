@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import machinesData from "../data/machines.json";
 import { GameContext } from "../contexts/GameContext";
 import { Button, Card, Tooltip, OverlayTrigger } from "react-bootstrap";
-import MachineQueue from "./MachineQueue";
 import machineSprites from "../assets/machines.png";
 import "./styles.css";
 import { IoHammer } from "react-icons/io5";
 
-function MachineBuilder() {
+function MachineBuilder({ queue, setQueue }) {
   const { state, dispatch } = useContext(GameContext);
-  const [buildingQueue, setBuildingQueue] = useState([]);
-  const [crafting, setCrafting] = useState(null);
 
   const buildMachine = (machine) => {
     const hasResources = machine.buildCost.every((ingredient) => {
@@ -24,7 +21,6 @@ function MachineBuilder() {
       return;
     }
 
-    // Deduct resources and add to queue
     machine.buildCost.forEach((ingredient) => {
       const availableAmount = state.resources[ingredient.name] || 0;
       const requiredAmount = ingredient.amount;
@@ -45,30 +41,8 @@ function MachineBuilder() {
       }
     });
 
-    setBuildingQueue((prevQueue) => {
-      const newQueue = [...prevQueue, machine];
-      return newQueue;
-    });
+    setQueue((prevQueue) => [...prevQueue, { ...machine, type: "machine" }]);
   };
-
-  useEffect(() => {
-    if (buildingQueue.length === 0) return;
-
-    const machine = buildingQueue[0];
-    const buildTime = machine.buildTime || 5;
-    setCrafting({ machine, processingTime: buildTime });
-
-    const timer = setTimeout(() => {
-      setCrafting(null);
-      dispatch({
-        type: "BUILD_MACHINE",
-        machine: machine.displayName,
-      });
-      setBuildingQueue((prevQueue) => prevQueue.slice(1));
-    }, buildTime * 1000);
-
-    return () => clearTimeout(timer);
-  }, [buildingQueue, dispatch]);
 
   const getMachineStyle = (index) => {
     const row = Math.floor(index / 5);
@@ -93,88 +67,70 @@ function MachineBuilder() {
   );
 
   return (
-    <>
-      <Card className="machine-card">
-        <Card.Header>Available Machines</Card.Header>
+    <Card className="machine-card">
+      <Card.Header>Available Machines</Card.Header>
+      <div className="machine-grid">
+        {availableMachines.map((machine, index) => {
+          const isBuildable = machine.buildCost.every((ingredient) => {
+            const availableAmount = state.resources[ingredient.name] || 0;
+            const availableProducts = state.products[ingredient.name] || 0;
+            return availableAmount + availableProducts >= ingredient.amount;
+          });
 
-        <div className="machine-grid m-2">
-          {availableMachines.map((machine, index) => {
-            const isBuildable = machine.buildCost.every((ingredient) => {
-              const availableAmount = state.resources[ingredient.name] || 0;
-              const availableProducts = state.products[ingredient.name] || 0;
-              return availableAmount + availableProducts >= ingredient.amount;
-            });
+          const renderTooltip = (props) => (
+            <Tooltip id="machine-output-tooltip" {...props}>
+              Inputs:{" "}
+              <ul className="m-0 p-0 list-unstyled">
+                {machine.buildCost.map((cost, idx) => (
+                  <li key={cost.name}>
+                    {cost.amount}x {cost.displayName}
+                  </li>
+                ))}
+              </ul>
+              Outputs:{" "}
+              <ul className="m-0 p-0 list-unstyled">
+                {machine.outputs.map((output) => (
+                  <li key={output.name}>{output.displayName}</li>
+                ))}
+              </ul>
+            </Tooltip>
+          );
 
-            const renderTooltip = (props) => (
-              <Tooltip id="machine-output-tooltip" {...props}>
-                Outputs:
-                <ul className="m-0 p-0 list-unstyled">
-                  {machine.outputs.map((output) => (
-                    <li key={output.name}>
-                      {machine.buildCost.map((cost, idx) => (
-                        <React.Fragment key={cost.name}>
-                          {idx > 0 && ", "}
-                          {cost.displayName}
-                        </React.Fragment>
-                      ))}{" "}
-                      &gt; {output.displayName}
-                    </li>
-                  ))}
-                </ul>
-              </Tooltip>
-            );
+          return (
+            <OverlayTrigger
+              key={machine.name}
+              placement="top"
+              overlay={renderTooltip}
+            >
+              <Card className="machine-item shadow-sm">
+                <Card.Body className="d-flex flex-column align-items-center">
+                  <div
+                    className={`text-center ${!isBuildable ? "grayscale" : ""}`}
+                    style={getMachineStyle(index)}
+                  ></div>
+                  <Card.Title>{machine.displayName}</Card.Title>
 
-            return (
-              <OverlayTrigger
-                key={machine.name}
-                placement="top"
-                overlay={renderTooltip}
-              >
-                <Card className="machine-item shadow-sm">
-                  <Card.Body className="d-flex flex-column align-items-center">
-                    <div
-                      className={`text-center ${
-                        !isBuildable ? "grayscale" : ""
-                      }`}
-                      style={getMachineStyle(index)}
-                    ></div>
-                    <Card.Title>{machine.displayName}</Card.Title>
-
-                    <p className="mb-0">Build Cost:</p>
-                    <ul>
-                      {machine.buildCost.map((cost) => (
-                        <li key={cost.name}>
-                          {cost.amount}x {cost.displayName}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button
-                      style={{
-                        padding: 10,
-                        borderRadius: "50%",
-                        display: "grid",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      variant="dark"
-                      onClick={() => buildMachine(machine)}
-                      disabled={!isBuildable || !!crafting}
-                    >
-                      <IoHammer size={24} />
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </OverlayTrigger>
-            );
-          })}
-        </div>
-      </Card>
-      <MachineQueue
-        queue={buildingQueue}
-        crafting={crafting}
-        remainingTime={crafting ? crafting.processingTime : 0}
-      />
-    </>
+                  <Button
+                    style={{
+                      padding: 8,
+                      borderRadius: "50%",
+                      display: "grid",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    variant="dark"
+                    onClick={() => buildMachine(machine)}
+                    disabled={!isBuildable}
+                  >
+                    <IoHammer size={32} />
+                  </Button>
+                </Card.Body>
+              </Card>
+            </OverlayTrigger>
+          );
+        })}
+      </div>
+    </Card>
   );
 }
 

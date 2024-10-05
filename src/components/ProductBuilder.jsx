@@ -39,8 +39,7 @@ function ProductBuilder({ setQueue, crafting }) {
     });
 
     // Add product to the queue
-    setQueue((prevQueue) => [...prevQueue, product]);
-
+    setQueue((prevQueue) => [...prevQueue, { ...product, type: "product" }]);
     // Dispatch the CRAFT_PRODUCT action
     dispatch({
       type: "CRAFT_PRODUCT",
