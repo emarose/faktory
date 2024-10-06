@@ -19,20 +19,28 @@ function App() {
 
   useEffect(() => {
     if (!crafting) return;
+    console.log(crafting);
 
+    // Set the remaining time for the crafting item
     let timer = setInterval(() => {
       setRemainingTime((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
           setQueue((prevQueue) => prevQueue.slice(1));
 
+          // Delay dispatch action until processing time is complete
+
           if (crafting.type === "product") {
-            dispatch({ type: "CRAFT_PRODUCT", product: crafting.displayName });
+            dispatch({ type: "CRAFT_PRODUCT", product: crafting.name });
           } else if (crafting.type === "machine") {
-            dispatch({ type: "BUILD_MACHINE", machine: crafting.displayName });
+            dispatch({
+              type: "BUILD_MACHINE",
+              machine: crafting.displayName,
+            });
           }
 
           setCrafting(null);
+
           return 0;
         }
         return prevTime - 1;

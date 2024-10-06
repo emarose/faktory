@@ -7,6 +7,11 @@ import AmountBadge from "./AmountBadge";
 
 function Processor() {
   const { state } = useContext(GameContext);
+  console.log("🚀 ~ Processor ~ state:", state);
+
+  if (!state.products) {
+    return null;
+  }
 
   return (
     <Card className="m-3 shadow-sm position-relative">

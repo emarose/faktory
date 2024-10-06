@@ -42,12 +42,11 @@ const gameReducer = (state, action) => {
         },
       };
     case "CRAFT_PRODUCT": {
-      const productName = action.product.name;
       return {
         ...state,
         products: {
           ...state.products,
-          [productName]: (state.products[productName] || 0) + 1,
+          [action.product]: (state.products[action.product] || 0) + 1,
         },
       };
     }

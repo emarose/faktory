@@ -7,7 +7,8 @@ import Icon from "./Icon";
 import "./styles.css";
 import { IoHammer } from "react-icons/io5";
 
-function ProductBuilder({ setQueue, crafting }) {
+function ProductBuilder({ setQueue, queue, crafting }) {
+  //console.log("🚀 ~ ProductBuilder ~ queue:", queue);
   const { state, dispatch } = useContext(GameContext);
 
   const canBuildProduct = (product) => {
@@ -23,6 +24,7 @@ function ProductBuilder({ setQueue, crafting }) {
   };
 
   const addProductToQueue = (product) => {
+    //console.log("🚀 ~ addProductToQueue ~ product:", product);
     product.ingredients.forEach((ingredient) => {
       dispatch({
         type: "DEDUCT_RESOURCE",
@@ -30,26 +32,8 @@ function ProductBuilder({ setQueue, crafting }) {
         amount: ingredient.amount,
       });
     });
+
     setQueue((prevQueue) => [...prevQueue, { ...product, type: "product" }]);
-    setTimeout(() => {
-      dispatch({
-        type: "CRAFT_PRODUCT",
-        product: product,
-      });
-    }, 2000); // Adjust the delay as per your crafting time
-  };
-
-  const achieveMilestone = (milestone) => {
-    console.log("🚀 ~ achieveMilestone ~ milestone:", milestone);
-    dispatch({
-      type: "COMPLETE_MILESTONE",
-      milestone: milestone.milestone,
-    });
-
-    // Trigger alert for the milestone achievement
-    alert(
-      `Milestone Achieved: ${milestone.description}!\nRewards:\n- ${milestone.reward.researchPoints} Research Points\n- Unlocks: ${milestone.reward.unlocks}`
-    );
   };
 
   const availableProducts = productsData.filter((product) => {
@@ -98,7 +82,7 @@ function ProductBuilder({ setQueue, crafting }) {
                   }}
                   variant="dark"
                   onClick={() => addProductToQueue(product)}
-                  disabled={!isBuildable || !!crafting}
+                  disabled={!isBuildable}
                 >
                   <IoHammer size={24} />
                 </Button>
