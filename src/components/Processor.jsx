@@ -8,19 +8,6 @@ import AmountBadge from "./AmountBadge";
 function Processor() {
   const { state } = useContext(GameContext);
 
-  // Function to determine if a product can be built
-  const canBuildProduct = (product) => {
-    const isMachineRequiredBuilt =
-      !product.machineRequired || !!state.machines[product.machineRequired];
-
-    return (
-      isMachineRequiredBuilt &&
-      product.ingredients.every((ingredient) => {
-        return (state.resources[ingredient.name] || 0) >= ingredient.amount;
-      })
-    );
-  };
-
   return (
     <Card className="m-3 shadow-sm position-relative">
       <Card.Header className="">Processed Products</Card.Header>
@@ -28,12 +15,7 @@ function Processor() {
       <Card.Body>
         <div className="d-flex flex-wrap gap-4">
           {productsData
-            .filter(
-              (product) =>
-                product.type === "product" &&
-                (state.products[product.name] || canBuildProduct(product))
-            )
-
+            .filter((product) => state.products[product.name] > 0)
             .map((product) => {
               const amount = state.products[product.name] || 0;
 
@@ -61,7 +43,7 @@ function Processor() {
                   >
                     <strong>{product.displayName}</strong>
                   </p>
-                  {amount > 0 && <AmountBadge amount={amount} />}
+                  <AmountBadge amount={amount} />
                 </div>
               );
             })}

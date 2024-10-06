@@ -81,7 +81,7 @@ function MachineBuilder({ queue, setQueue }) {
             <Tooltip id="machine-output-tooltip" {...props}>
               Inputs:{" "}
               <ul className="m-0 p-0 list-unstyled">
-                {machine.buildCost.map((cost, idx) => (
+                {machine.buildCost.map((cost) => (
                   <li key={cost.name}>
                     {cost.amount}x {cost.displayName}
                   </li>
@@ -109,6 +109,18 @@ function MachineBuilder({ queue, setQueue }) {
                     style={getMachineStyle(index)}
                   ></div>
                   <Card.Title>{machine.displayName}</Card.Title>
+
+                  {/* Display Build Cost */}
+                  <div className="text-muted" style={{ fontSize: "0.8rem" }}>
+                    Build Cost:
+                    <ul className="m p-0 list-unstyled">
+                      {machine.buildCost.map((cost) => (
+                        <li key={cost.name}>
+                          {cost.amount}x {cost.displayName}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
                   <Button
                     style={{

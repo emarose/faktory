@@ -23,13 +23,6 @@ function ProductBuilder({ setQueue, crafting }) {
   };
 
   const addProductToQueue = (product) => {
-    console.log("🚀 ~ addProductToQueue ~ product:", product);
-    if (!canBuildProduct(product)) {
-      alert(`Not enough materials to craft ${product.displayName}`);
-      return;
-    }
-
-    // Deduct resources for the product
     product.ingredients.forEach((ingredient) => {
       dispatch({
         type: "DEDUCT_RESOURCE",
@@ -37,25 +30,13 @@ function ProductBuilder({ setQueue, crafting }) {
         amount: ingredient.amount,
       });
     });
-
-    // Add product to the queue
     setQueue((prevQueue) => [...prevQueue, { ...product, type: "product" }]);
-    // Dispatch the CRAFT_PRODUCT action
-    dispatch({
-      type: "CRAFT_PRODUCT",
-      product: product,
-    });
-
-    // Check for milestones
-    milestonesData.forEach((milestone) => {
-      if (
-        state.products[product.name] >= milestone.requiredAmount &&
-        milestone.resource === product.name &&
-        !state.milestones[milestone.milestone]
-      ) {
-        achieveMilestone(milestone);
-      }
-    });
+    setTimeout(() => {
+      dispatch({
+        type: "CRAFT_PRODUCT",
+        product: product,
+      });
+    }, 2000); // Adjust the delay as per your crafting time
   };
 
   const achieveMilestone = (milestone) => {

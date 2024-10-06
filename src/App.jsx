@@ -94,7 +94,11 @@ function App() {
       <div className="row mb-2">
         <div className="col-md-12">
           {availableProducts.length > 0 && (
-            <ProductBuilder queue={queue} setQueue={setQueue} />
+            <ProductBuilder
+              queue={queue}
+              setQueue={setQueue}
+              crafting={crafting}
+            />
           )}
         </div>
       </div>
