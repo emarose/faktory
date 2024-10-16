@@ -28,9 +28,9 @@ function BuiltMachines() {
   );
 
   return (
-    <Card className="built-machines-card">
-      <Card.Header>Built Machines</Card.Header>
-      <div className="d-flex gap-3">
+    <div className="nes-container with-title is-dark my-3 shadow-sm">
+      <p className="title">Built Machines</p>
+      <div className="d-flex flex-column gap-3 align-items-center">
         {builtMachines.map((machine, index) => (
           <div key={machine} className="machine-card p-2">
             <div className="position-relative" style={getMachineStyle(index)}>
@@ -40,7 +40,7 @@ function BuiltMachines() {
                 )}
               </div>
               <div
-                className="position-absolute bottom-0 badge badge-pill mb-2 ms-2 "
+                className="position-absolute bottom-0 badge badge-pill mb-2 ms-2 fw-light"
                 style={{ backgroundColor: "slateblue" }}
               >
                 <span className="text-light">{machine}</span>
@@ -49,7 +49,7 @@ function BuiltMachines() {
           </div>
         ))}
       </div>
-    </Card>
+    </div>
   );
 }
 

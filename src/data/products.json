@@ -24,6 +24,19 @@
     "tier": 1
   },
   {
+    "name": "circuits",
+    "displayName": "Circuits",
+    "type": "product",
+    "ingredients": [
+      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 1 }
+    ],
+    "machineRequired": "Assembler",
+    "processingTime": 3,
+    "outputQuantity": 1,
+    "tier": 2
+  },
+  {
     "name": "organicFuel",
     "displayName": "Organic Fuel",
     "type": "product",
@@ -59,19 +72,7 @@
     "outputQuantity": 1,
     "tier": 3
   },
-  {
-    "name": "circuits",
-    "displayName": "Circuits",
-    "type": "product",
-    "ingredients": [
-      { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 2 },
-      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 2 }
-    ],
-    "machineRequired": "Processor",
-    "processingTime": 3,
-    "outputQuantity": 2,
-    "tier": 3
-  },
+
   {
     "name": "bioIron",
     "displayName": "Bio-Iron",

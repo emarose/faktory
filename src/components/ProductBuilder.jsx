@@ -6,33 +6,47 @@ import milestonesData from "../data/milestones.json";
 import Icon from "./Icon";
 import "./styles.css";
 import { IoHammer } from "react-icons/io5";
+import ProductIcon from "./productIcon";
 
 function ProductBuilder({ setQueue, queue, crafting }) {
-  //console.log("🚀 ~ ProductBuilder ~ queue:", queue);
   const { state, dispatch } = useContext(GameContext);
 
   const canBuildProduct = (product) => {
     const isMachineRequiredBuilt =
       !product.machineRequired || !!state.machines[product.machineRequired];
 
+    product.ingredients.every((ingredient) => {
+      ingredient;
+    });
+
     return (
       isMachineRequiredBuilt &&
       product.ingredients.every((ingredient) => {
-        return (state.resources[ingredient.name] || 0) >= ingredient.amount;
+        return (
+          (state.resources[ingredient.name] ||
+            state.products[ingredient.name] ||
+            0) >= ingredient.amount
+        );
       })
     );
   };
 
   const addProductToQueue = (product) => {
-    //console.log("🚀 ~ addProductToQueue ~ product:", product);
+    console.log("🚀 ~ addProductToQueue ~ product:", product.ingredients);
+
     product.ingredients.forEach((ingredient) => {
+      const isProduct = !!state.products[ingredient.name];
+      const actionType = isProduct ? "DEDUCT_PRODUCT" : "DEDUCT_RESOURCE";
+
       dispatch({
-        type: "DEDUCT_RESOURCE",
-        resource: ingredient.name,
+        type: actionType,
+        resource: isProduct ? undefined : ingredient.name,
+        product: isProduct ? ingredient.name : undefined,
         amount: ingredient.amount,
       });
     });
 
+    // Add product to the queue
     setQueue((prevQueue) => [...prevQueue, { ...product, type: "product" }]);
   };
 
@@ -50,48 +64,56 @@ function ProductBuilder({ setQueue, queue, crafting }) {
   }
 
   return (
-    <Card className="product-card">
-      <Card.Header>Product Builder</Card.Header>
+    <div className="nes-container with-title is-dark my-3 col-12">
+      <p className="title">Product Builder</p>
 
       <div className="product-grid">
         {availableProducts.map((product) => {
           const isBuildable = canBuildProduct(product);
-          const isCrafting = crafting && crafting.name === product.name;
 
           return (
-            <Card key={product.name} className="m-2 product-item">
-              <Card.Body className="p-2 align-items-center d-flex flex-column">
-                <div className="d-flex flex-column align-items-center mt-2">
-                  <Icon name={product.name} />
-                  <Card.Title>{product.displayName}</Card.Title>
+            <div
+              key={product.name}
+              className="nes-container is-dark is-rounded d-flex flex-column align-items-center justify-content-center "
+            >
+              <div className="align-items-center d-flex flex-column">
+                <div className="d-flex flex-column align-items-center">
+                  <ProductIcon name={product.name} />
+                  <p
+                    className="fw-light mt-2 text-nowrap"
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    {product.displayName}
+                  </p>
                 </div>
-                <ul>
-                  {product.ingredients.map((ingredient) => (
-                    <small key={ingredient.name}>
-                      {ingredient.amount}x {ingredient.displayName}
-                    </small>
-                  ))}
-                </ul>
-                <Button
+
+                {product.ingredients.map((ingredient) => (
+                  <span
+                    className="badge badge-pill fw-light text-nowrap"
+                    style={{ backgroundColor: "slateblue" }}
+                    key={ingredient.name}
+                  >
+                    {ingredient.amount}x {ingredient.displayName}
+                  </span>
+                ))}
+
+                <button
+                  type="button"
+                  className={`nes-btn mt-3  ${!isBuildable && "is-disabled"}`}
                   style={{
                     padding: 10,
-                    borderRadius: "50%",
-                    display: "grid",
-                    alignItems: "center",
-                    justifyContent: "center",
                   }}
-                  variant="dark"
                   onClick={() => addProductToQueue(product)}
                   disabled={!isBuildable}
                 >
-                  <IoHammer size={24} />
-                </Button>
-              </Card.Body>
-            </Card>
+                  <IoHammer size={28} />
+                </button>
+              </div>
+            </div>
           );
         })}
       </div>
-    </Card>
+    </div>
   );
 }
 

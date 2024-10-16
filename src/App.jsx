@@ -10,25 +10,21 @@ import productsData from "./data/products.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  // Unified state for both products and machines
   const [queue, setQueue] = useState([]);
   const [crafting, setCrafting] = useState(null);
   const [remainingTime, setRemainingTime] = useState(0);
 
   const { state, dispatch } = useContext(GameContext);
+  console.log("🚀 ~ App ~ state:", state);
 
   useEffect(() => {
     if (!crafting) return;
-    console.log(crafting);
 
-    // Set the remaining time for the crafting item
     let timer = setInterval(() => {
       setRemainingTime((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
           setQueue((prevQueue) => prevQueue.slice(1));
-
-          // Delay dispatch action until processing time is complete
 
           if (crafting.type === "product") {
             dispatch({ type: "CRAFT_PRODUCT", product: crafting.name });
@@ -78,9 +74,9 @@ function App() {
   };
 
   const availableProducts = getAvailableProducts();
-
   return (
     <div className="container-fluid bg-dark" style={{ minHeight: "100vh" }}>
+      {/* Queue display */}
       <Queue
         title="Crafting Queue"
         queue={queue}
@@ -88,19 +84,19 @@ function App() {
         remainingTime={remainingTime}
       />
 
-      <div className="row mb-2">
-        <div className="col-md-12">
+      {/* Main 3-column layout */}
+      <div className="row">
+        {/* Column 1: Resource Extractor */}
+        <div className="col-lg-3 col-md-12 mb-3">
           <ResourceExtractor />
         </div>
-      </div>
-      <div className="row mb-2">
-        <div className="col-md-12">{hasProcessedProducts && <Processor />}</div>
-      </div>
-      <div className="row mb-2">
-        <div className="col-md-12">{hasMachinesBuilt && <BuiltMachines />}</div>
-      </div>
-      <div className="row mb-2">
-        <div className="col-md-12">
+
+        {/* Column 2: Processor and Builders */}
+        <div className="col-lg-6 col-md-12 mb-3">
+          {/* Processor */}
+          {hasProcessedProducts && <Processor />}
+
+          {/* Product Builder */}
           {availableProducts.length > 0 && (
             <ProductBuilder
               queue={queue}
@@ -108,11 +104,14 @@ function App() {
               crafting={crafting}
             />
           )}
-        </div>
-      </div>
-      <div className="row mb-2">
-        <div className="col-md-12">
+
+          {/* Machine Builder */}
           <MachineBuilder queue={queue} setQueue={setQueue} />
+        </div>
+
+        {/* Column 3: Built Machines */}
+        <div className="col-lg-3 col-md-12 mb-3">
+          {hasMachinesBuilt && <BuiltMachines />}
         </div>
       </div>
     </div>

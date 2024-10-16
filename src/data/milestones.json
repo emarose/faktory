@@ -1,13 +1,14 @@
 [
   {
-    "milestone": "build_furnace",
-    "description": "Build the first Furnace",
+    "milestone": "build_assembler",
+    "description": "Build an assembler",
     "requiredAmount": 1,
-    "resource": "furnace",
+    "resource": "assembler",
     "reward": {
       "researchPoints": 10,
-      "unlocks": "Steel Production"
-    }
+      "unlocks": "Circuits Production"
+    },
+    "unlockTier": "tier2"
   },
   {
     "milestone": "construct_bio_processor",
@@ -17,7 +18,8 @@
     "reward": {
       "researchPoints": 15,
       "unlocks": "Bio-Furnace"
-    }
+    },
+    "unlockTier": "tier3"
   },
   {
     "milestone": "build_bio_furnace",

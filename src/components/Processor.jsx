@@ -1,60 +1,51 @@
 import React, { useContext } from "react";
 import productsData from "../data/products.json";
 import { GameContext } from "../contexts/GameContext";
-import { Card } from "react-bootstrap";
-import Icon from "./Icon";
+
 import AmountBadge from "./AmountBadge";
+import "./styles.css";
+import ProductIcon from "./productIcon";
 
 function Processor() {
   const { state } = useContext(GameContext);
-  console.log("🚀 ~ Processor ~ state:", state);
 
   if (!state.products) {
     return null;
   }
 
   return (
-    <Card className="m-3 shadow-sm position-relative">
-      <Card.Header className="">Processed Products</Card.Header>
+    <div className="nes-container with-title is-dark my-3 col-12">
+      <p className="title">Processed Products</p>
 
-      <Card.Body>
-        <div className="d-flex flex-wrap gap-4">
-          {productsData
-            .filter((product) => state.products[product.name] > 0)
-            .map((product) => {
-              const amount = state.products[product.name] || 0;
+      <div className="product-grid">
+        {productsData
+          .filter((product) => state.products[product.name] > 0)
+          .map((product) => {
+            const amount = state.products[product.name] || 0;
 
-              return (
-                <div
-                  key={product.name}
-                  className="d-flex flex-column align-items-center p-2 bg-light rounded position-relative"
-                  style={{ width: "120px", overflow: "hidden" }}
-                >
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      overflow: "hidden",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Icon name={product.name} />
+            return (
+              <div
+                key={product.name}
+                className="nes-container pb-1 pt-4 is-dark is-rounded d-flex flex-column align-items-center justify-content-center"
+              >
+                <div className="align-items-center d-flex flex-column">
+                  <div className="d-flex flex-column align-items-center">
+                    <ProductIcon name={product.name} />
+                    <p
+                      className="fw-light mt-2 text-nowrap"
+                      style={{ fontSize: "0.69rem" }}
+                    >
+                      {product.displayName}
+                    </p>
                   </div>
-                  <p
-                    className="mt-2 text-center text-muted"
-                    style={{ fontSize: "0.9rem", wordBreak: "break-word" }}
-                  >
-                    <strong>{product.displayName}</strong>
-                  </p>
+
                   <AmountBadge amount={amount} />
                 </div>
-              );
-            })}
-        </div>
-      </Card.Body>
-    </Card>
+              </div>
+            );
+          })}
+      </div>
+    </div>
   );
 }
 

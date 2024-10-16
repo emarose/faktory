@@ -5,12 +5,12 @@ const initialState = {
     ironOre: 0,
     copperOre: 0,
     coal: 0,
-    biomass: 0,
-    stone: 0,
+    //biomass: 0,
+    //stone: 0,
   },
   products: {},
   machines: {},
-  milestones: { build_furnace: false },
+  milestones: { build_assembler: false },
   unlockedTiers: {
     tier1: true,
     tier2: false,
@@ -19,6 +19,15 @@ const initialState = {
     tier5: false,
     tier6: false,
   },
+};
+
+const milestoneToTierMapping = {
+  build_assembler: "tier2",
+  build_processor: "tier3",
+  construct_bio_processor: "tier4",
+  build_bio_furnace: "tier5",
+  create_mech_bio_unit: "tier6",
+  activate_bio_environment: "tier7",
 };
 
 const gameReducer = (state, action) => {
@@ -100,24 +109,11 @@ const gameReducer = (state, action) => {
       };
 
       let updatedTiers = { ...state.unlockedTiers };
-      switch (action.milestone) {
-        case "build_furnace":
-          updatedTiers.tier2 = true;
-          break;
-        case "construct_bio_processor":
-          updatedTiers.tier3 = true;
-          break;
-        case "build_bio_furnace":
-          updatedTiers.tier4 = true;
-          break;
-        case "create_mech_bio_unit":
-          updatedTiers.tier5 = true;
-          break;
-        case "activate_bio_environment":
-          updatedTiers.tier6 = true;
-          break;
-        default:
-          break;
+
+      // Use milestoneToTierMapping to unlock the next tier
+      const nextTier = milestoneToTierMapping[action.milestone];
+      if (nextTier) {
+        updatedTiers[nextTier] = true;
       }
 
       console.log("Updated milestones:", updatedMilestones);
@@ -127,6 +123,14 @@ const gameReducer = (state, action) => {
         ...state,
         milestones: updatedMilestones,
         unlockedTiers: updatedTiers,
+      };
+    case "UNLOCK_TIER":
+      return {
+        ...state,
+        unlockedTiers: {
+          ...state.unlockedTiers,
+          [action.tier]: true,
+        },
       };
     default:
       return state;
