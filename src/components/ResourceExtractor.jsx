@@ -67,8 +67,7 @@ function ResourceExtractor() {
                 className="position-relative"
                 style={{ width: "auto" }}
               >
-                <Button
-                  variant="secondary"
+                <div
                   onClick={(event) =>
                     extractResource(
                       resource,
@@ -77,19 +76,16 @@ function ResourceExtractor() {
                       event
                     )
                   }
-                  className="d-flex align-items-center gap-2 p-2 shadow-sm"
+                  className="d-flex align-items-center gap-3 nes-container p-3 is-dark is-rounded"
                   style={{
                     cursor: "pointer",
-                    minWidth: "240px",
-
+                    minWidth: "250px",
                     fontSize: "0.8rem",
-                    textAlign: "left",
-                    backgroundColor: "#f8f9fa",
                   }}
                 >
                   <ProductIcon name={resource} />
-                  <span className="text-muted">{getDisplayName(resource)}</span>
-                </Button>
+                  <span className="text-white">{getDisplayName(resource)}</span>
+                </div>
                 {amount > 0 && <AmountBadge amount={amount} />}
               </div>
             );

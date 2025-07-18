@@ -74,41 +74,47 @@ function ProductBuilder({ setQueue, queue, crafting }) {
           return (
             <div
               key={product.name}
-              className="nes-container is-dark is-rounded d-flex flex-column align-items-center justify-content-center "
+              className="nes-container is-dark is-rounded d-flex flex-column align-items-center justify-content-between "
             >
-              <div className="align-items-center d-flex flex-column">
-                <div className="d-flex flex-column align-items-center">
-                  <ProductIcon name={product.name} />
-                  <p
-                    className="fw-light mt-2 text-nowrap"
-                    style={{ fontSize: "0.8rem" }}
-                  >
-                    {product.displayName}
-                  </p>
-                </div>
-
+              <ProductIcon
+                className={`${!isBuildable ? "grayscale" : ""}`}
+                name={product.name}
+              />
+              <p
+                className="fw-light mt-2 text-nowrap"
+                style={{
+                  fontSize: "0.8rem",
+                  color: !isBuildable ? "gray" : "white",
+                }}
+              >
+                {product.displayName}
+              </p>
+              <div className="d-flex flex-column gap-1">
                 {product.ingredients.map((ingredient) => (
                   <span
                     className="badge badge-pill fw-light text-nowrap"
-                    style={{ backgroundColor: "slateblue" }}
+                    style={{
+                      backgroundColor: "slateblue",
+                      fontSize: "0.7rem",
+                    }}
                     key={ingredient.name}
                   >
                     {ingredient.amount}x {ingredient.displayName}
                   </span>
                 ))}
-
-                <button
-                  type="button"
-                  className={`nes-btn mt-3  ${!isBuildable && "is-disabled"}`}
-                  style={{
-                    padding: 10,
-                  }}
-                  onClick={() => addProductToQueue(product)}
-                  disabled={!isBuildable}
-                >
-                  <IoHammer size={28} />
-                </button>
               </div>
+
+              <button
+                type="button"
+                className={`nes-btn mt-3  ${!isBuildable && "is-disabled"}`}
+                style={{
+                  padding: 4,
+                }}
+                onClick={() => addProductToQueue(product)}
+                disabled={!isBuildable}
+              >
+                <IoHammer size={26} />
+              </button>
             </div>
           );
         })}

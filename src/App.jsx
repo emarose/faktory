@@ -15,7 +15,6 @@ function App() {
   const [remainingTime, setRemainingTime] = useState(0);
 
   const { state, dispatch } = useContext(GameContext);
-  console.log("🚀 ~ App ~ state:", state);
 
   useEffect(() => {
     if (!crafting) return;
@@ -97,13 +96,13 @@ function App() {
           {hasProcessedProducts && <Processor />}
 
           {/* Product Builder */}
-          {availableProducts.length > 0 && (
+          {/* {availableProducts.length > 0 && (
             <ProductBuilder
               queue={queue}
               setQueue={setQueue}
               crafting={crafting}
             />
-          )}
+          )} */}
 
           {/* Machine Builder */}
           <MachineBuilder queue={queue} setQueue={setQueue} />

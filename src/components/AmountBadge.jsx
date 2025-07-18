@@ -18,8 +18,8 @@ const AmountBadge = ({ amount }) => {
       className={`badge ${bounce ? "bounce" : ""}`}
       style={{
         position: "absolute",
-        top: "12px",
-        right: "10px",
+        top: "16px",
+        right: "16px",
         backgroundColor: "slateblue",
         color: "#ffffff",
         borderRadius: "50%",

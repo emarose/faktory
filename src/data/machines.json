@@ -9,6 +9,7 @@
       { "name": "ironOre", "displayName": "Iron Ore", "amount": 1 }
     ],
     "processingTime": 3,
+    "powerConsumption": 1,
     "outputs": [
       { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 1 },
       { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 1 }
@@ -16,6 +17,24 @@
     "inputs": [
       { "name": "ironOre", "displayName": "Iron Ore" },
       { "name": "copperOre", "displayName": "Copper Ore" }
+    ],
+    "recipes": [
+      {
+        "input": [
+          { "name": "ironOre", "amount": 1 },
+          { "name": "coal", "amount": 1, "type": "fuel" }
+        ],
+        "output": { "name": "ironIngot", "amount": 1 },
+        "processingTime": 1
+      },
+      {
+        "input": [
+          { "name": "copperOre", "amount": 1 },
+          { "name": "coal", "amount": 1, "type": "fuel" }
+        ],
+        "output": { "name": "copperIngot", "amount": 1 },
+        "processingTime": 1
+      }
     ]
   },
   {
@@ -32,13 +51,66 @@
     "inputs": [
       { "name": "ironIngot", "displayName": "Iron Ingot" },
       { "name": "copperIngot", "displayName": "Copper Ingot" }
+    ],
+    "recipes": [
+      {
+        "input": [
+          { "name": "energy", "amount": 0.33, "type": "fuel" },
+          { "name": "ironIngot", "amount": 1 },
+          { "name": "copperIngot", "amount": 1 }
+        ],
+        "output": { "name": "circuits", "amount": 1 }
+      }
     ]
   },
   {
-    "name": "electricFurnace",
-    "displayName": "Electric Furnace",
+    "name": "bioProcessor",
+    "displayName": "Bio-Processor",
     "type": "machine",
     "tier": 2,
+    "buildCost": [
+      { "name": "circuits", "displayName": "Circuits", "amount": 2 },
+      { "name": "copperIngot", "displayName": "Copper Ingot", "amount": 3 },
+      { "name": "steelIngot", "displayName": "Steel Ingot", "amount": 3 }
+    ],
+    "processingTime": 5,
+    "outputs": [
+      {
+        "name": "advancedCircuit",
+        "displayName": "Advanced Circuit",
+        "amount": 1
+      },
+      { "name": "bioFuel", "displayName": "Bio-Fuel", "amount": 1 }
+    ],
+    "inputs": [
+      { "name": "biomass", "displayName": "Biomass" },
+      { "name": "copperIngot", "displayName": "Copper Ingot" },
+      { "name": "steelIngot", "displayName": "Steel Ingot" }
+    ],
+    "recipes": [
+      {
+        "input": [
+          { "name": "biomass", "amount": 1 },
+          { "name": "copperIngot", "amount": 1 },
+          { "name": "steelIngot", "amount": 1 }
+        ],
+        "output": { "name": "advancedCircuit", "amount": 1 }
+      },
+      {
+        "input": [
+          { "name": "biomass", "amount": 1 },
+          { "name": "copperIngot", "amount": 1 },
+          { "name": "steelIngot", "amount": 1 }
+        ],
+        "output": { "name": "bioFuel", "amount": 1 }
+      }
+    ]
+  },
+  {
+    "name": "advancedFurnace",
+    "displayName": "Advanced Furnace",
+    "type": "machine",
+    "tier": 3,
     "buildCost": [
       { "name": "circuits", "displayName": "Circuits", "amount": 3 },
       { "name": "ironIngot", "displayName": "Iron Ingot", "amount": 5 }
@@ -47,32 +119,12 @@
     "outputs": [
       { "name": "steelIngot", "displayName": "Steel Ingot", "amount": 3 }
     ],
-    "inputs": [{ "name": "ironIngot", "displayName": "Iron Ingot" }]
-  },
-  {
-    "name": "roboticAssembler",
-    "displayName": "Robotic Assembler",
-    "type": "machine",
-    "tier": 2,
-    "buildCost": [
+    "inputs": [{ "name": "ironIngot", "displayName": "Iron Ingot" }],
+    "recipes": [
       {
-        "name": "electricMotor",
-        "displayName": "Electric Motor",
-        "amount": 10
-      },
-      { "name": "circuitBoard", "displayName": "Circuit Board", "amount": 15 }
-    ],
-    "processingTime": 8,
-    "outputs": [
-      {
-        "name": "advancedCircuit",
-        "displayName": "Advanced Circuit",
-        "amount": 1
+        "input": [{ "name": "ironIngot", "amount": 1 }],
+        "output": { "name": "steelIngot", "amount": 3 }
       }
-    ],
-    "inputs": [
-      { "name": "circuitBoard", "displayName": "Circuit Board" },
-      { "name": "electricMotor", "displayName": "Electric Motor" }
     ]
   },
   {
@@ -86,7 +138,13 @@
     ],
     "processingTime": 5,
     "outputs": [{ "name": "bioFuel", "displayName": "Bio-Fuel", "amount": 4 }],
-    "inputs": [{ "name": "biomass", "displayName": "Biomass" }]
+    "inputs": [{ "name": "biomass", "displayName": "Biomass" }],
+    "recipes": [
+      {
+        "input": [{ "name": "biomass", "amount": 1 }],
+        "output": { "name": "bioFuel", "amount": 4 }
+      }
+    ]
   },
   {
     "name": "mechBioAssembler",
@@ -113,6 +171,15 @@
     "inputs": [
       { "name": "bioProcessor", "displayName": "Bio-Processor" },
       { "name": "electricMotor", "displayName": "Electric Motor" }
+    ],
+    "recipes": [
+      {
+        "input": [
+          { "name": "bioProcessor", "amount": 1 },
+          { "name": "electricMotor", "amount": 1 }
+        ],
+        "output": { "name": "mechBioComponent", "amount": 1 }
+      }
     ]
   }
 ]

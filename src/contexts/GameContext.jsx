@@ -51,11 +51,12 @@ const gameReducer = (state, action) => {
         },
       };
     case "CRAFT_PRODUCT": {
+      const { product, amount } = action;
       return {
         ...state,
         products: {
           ...state.products,
-          [action.product]: (state.products[action.product] || 0) + 1,
+          [product]: (state.products[product] || 0) + amount,
         },
       };
     }
@@ -132,6 +133,7 @@ const gameReducer = (state, action) => {
           [action.tier]: true,
         },
       };
+
     default:
       return state;
   }
